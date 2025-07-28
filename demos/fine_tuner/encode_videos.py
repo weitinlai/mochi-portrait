@@ -87,7 +87,7 @@ def preprocess(ctx: GPUContext, vid_path: Path, shape: str, reconstruct: bool):
 @click.option(
     "--recon_interval", default=10, help="Reconstruct one out of every N videos (0 to disable reconstruction)"
 )
-@click.option("--shape", default="163x480x848", help="Shape of the video to encode")
+@click.option("--shape", default="163x896x512", help="Shape of the video to encode")
 @click.option("--overwrite", "-ow", is_flag=True, help="Overwrite existing latents")
 def batch_process(
     videos_dir: Path, model_dir: Path, num_gpus: int, recon_interval: int, shape: str, overwrite: bool

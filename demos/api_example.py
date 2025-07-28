@@ -37,8 +37,8 @@ inviting atmosphere.
 """)
 
 video = pipeline(
-    height=480,
-    width=848,
+    height=896,
+    width=512,
     num_frames=31,
     num_inference_steps=64,
     sigma_schedule=linear_quadratic_schedule(64, 0.025),

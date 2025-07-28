@@ -186,8 +186,8 @@ class MochiLora():
     def generate(self, 
                 prompt: str,
                 negative_prompt: str = "",
-                width: int = 848,
-                height: int = 480,
+                width: int = 512,
+                height: int = 896,
                 num_frames: int = 163,
                 seed: int = 1710977262,
                 cfg_scale: float = 6.0,
@@ -254,8 +254,8 @@ class MochiLora():
 def main(
     prompt="A pristine snowglobe featuring a winter scene sits peacefully. The glass begins to crumble into fine powder, as the entire sphere deteriorates into sparkling dust that drifts outward. The fake snow mingles with the crystalline particles, creating a glittering cloud captured in high-speed photography.",
     negative_prompt="blurry, low quality",
-    width=848,
-    height=480,
+    width=512,
+    height=896,
     num_frames=49, # (num_frames - 1) must be divisible by 6
     seed=1710977262,
     cfg_scale=6.0,

@@ -19,8 +19,8 @@ with gr.Blocks() as demo:
         negative_prompt = gr.Textbox(label="Negative Prompt", value="")
         seed = gr.Number(label="Seed", value=1710977262, precision=0)
     with gr.Row():
-        width = gr.Number(label="Width", value=848, precision=0)
-        height = gr.Number(label="Height", value=480, precision=0)
+        width = gr.Number(label="Width", value=512, precision=0)
+        height = gr.Number(label="Height", value=896, precision=0)
         num_frames = gr.Number(label="Number of Frames", value=163, precision=0)
     with gr.Row():
         cfg_scale = gr.Number(label="CFG Scale", value=6.0)

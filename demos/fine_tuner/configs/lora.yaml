@@ -50,8 +50,8 @@ sample:
        - A delicate porcelain teacup sits on a marble countertop. The teacup suddenly shatters into hundreds of white ceramic shards that scatter through the air. The scene is bright and crisp with dramatic lighting.
    seed: 12345
    kwargs:
-     height: 480
-     width: 848
+     height: 896
+     width: 512
      num_frames: 37
      num_inference_steps: 64
      sigma_schedule_python_code: "linear_quadratic_schedule(64, 0.025)"

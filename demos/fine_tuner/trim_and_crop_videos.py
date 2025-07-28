@@ -11,7 +11,7 @@ from tqdm import tqdm
 @click.argument("folder", type=click.Path(exists=True, dir_okay=True))
 @click.argument("output_folder", type=click.Path(dir_okay=True))
 @click.option("--duration", "-d", type=float, default=5.4, help="Duration in seconds")
-@click.option("--resolution", "-r", type=str, default="848x480", help="Video resolution")
+@click.option("--resolution", "-r", type=str, default="512x896", help="Video resolution in WIDTHxHEIGHT format")
 def truncate_videos(folder, output_folder, duration, resolution):
     """Truncate all MP4 and MOV files in FOLDER to specified duration and resolution"""
     input_path = Path(folder)

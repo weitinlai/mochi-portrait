@@ -29,11 +29,12 @@ fi
 
 # Function to display help
 usage() {
-  echo "Usage: $0 -v|--videos_dir videos_dir -o|--output_dir output_dir -w|--weights_dir weights_dir -n|--num_frames num_frames"
+  echo "Usage: $0 -v|--videos_dir videos_dir -o|--output_dir output_dir -w|--weights_dir weights_dir -n|--num_frames num_frames [-r|--resolution resolution]"
   echo "  -v, --videos_dir            Path to the videos directory"
   echo "  -o, --output_dir            Path to the output directory"
   echo "  -w, --weights_dir           Path to the weights directory"
   echo "  -n, --num_frames            Number of frames"
+  echo "  -r, --resolution            Video resolution (e.g., 512x768, default: 512x768)"
   exit 1
 }
 
@@ -46,12 +47,14 @@ check_argument() {
 }
 
 # Parse command-line arguments
+RESOLUTION="512x768"  # Default portrait resolution
 while [[ "$#" -gt 0 ]]; do
   case $1 in
     -v|--videos_dir) check_argument "$1" "$2"; VIDEOS_DIR="$2"; shift ;;
     -o|--output_dir) check_argument "$1" "$2"; OUTPUT_DIR="$2"; shift ;;
     -w|--weights_dir) check_argument "$1" "$2"; WEIGHTS_DIR="$2"; shift ;;
     -n|--num_frames) check_argument "$1" "$2"; NUM_FRAMES="$2"; shift ;;
+    -r|--resolution) check_argument "$1" "$2"; RESOLUTION="$2"; shift ;;
     -h|--help) usage ;;
     *) echo "Unknown parameter passed: $1"; usage ;;
   esac
@@ -73,12 +76,17 @@ echo -e "\n\e[1;35m🎬 **Step 1: Trim and resize videos** \e[0m"
 # Calculate duration to trim videos
 DURATION=$(printf "%.1f" "$(echo "($NUM_FRAMES / 30) + 0.09" | bc -l)")
 echo "Trimming videos to duration: ${DURATION} seconds"
-python3 ${SCRIPT_DIR}/trim_and_crop_videos.py ${VIDEOS_DIR} ${OUTPUT_DIR} -d ${DURATION}
+python3 ${SCRIPT_DIR}/trim_and_crop_videos.py ${VIDEOS_DIR} ${OUTPUT_DIR} -d ${DURATION} -r ${RESOLUTION}
 
 ##### Step 2: Run the VAE encoder on each video.
 echo -e "\n\e[1;35m🎥 **Step 2: Run the VAE encoder on each video** \e[0m"
+
+# Parse RESOLUTION into HEIGHT and WIDTH for --shape
+HEIGHT=$(echo $RESOLUTION | cut -d'x' -f2)
+WIDTH=$(echo $RESOLUTION | cut -d'x' -f1)
+
 python3 ${SCRIPT_DIR}/encode_videos.py ${OUTPUT_DIR} \
-  --model_dir ${WEIGHTS_DIR} --num_gpus 1 --shape "${NUM_FRAMES}x480x848" --overwrite
+  --model_dir ${WEIGHTS_DIR} --num_gpus 1 --shape "${NUM_FRAMES}x${HEIGHT}x${WIDTH}" --overwrite
 
 ##### Step 3: Compute T5 embeddings
 echo -e "\n\e[1;35m🧠 **Step 3: Compute T5 embeddings** \e[0m"
