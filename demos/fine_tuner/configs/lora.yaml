@@ -43,9 +43,9 @@ sample:
    output_dir: ${checkpoint_dir}/samples
    decoder_path: weights/decoder.safetensors
    prompts:
-       - stylegirl01 dancing in a school uniform on a concert stage, bright lighting, energetic performance, expressive and confident.
-       - stylegirl01 dancing on stage in a school uniform with lively expressions.
-       - stylegirl01 in a school uniform, singing and dancing energetically on stage, full of confidence and charm.  The scene is vibrant and colorful.
+       - A girl dancing in a school uniform on a concert stage, bright lighting, energetic performance, expressive and confident.
+       - A girl dancing on stage in a school uniform with lively expressions.
+       - A girl in a school uniform, singing and dancing energetically on stage, full of confidence and charm.  The scene is vibrant and colorful.
    seed: 12345
    kwargs:
      height: 896
